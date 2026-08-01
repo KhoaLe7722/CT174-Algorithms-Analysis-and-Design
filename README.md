@@ -1,6 +1,6 @@
 # CT174 — Algorithms Analysis and Design
 
-> Tài liệu học tập và mã nguồn minh họa cho học phần \\\\\\\\\\\\\\\*\\\\\\\\\\\\\\\*CT174 – Phân tích và Thiết kế thuật toán\\\\\\\\\\\\\\\*\\\\\\\\\\\\\\\*.
+> Tài liệu học tập và mã nguồn minh họa cho học phần \\\*\\\*CT174 – Phân tích và Thiết kế thuật toán\\\*\\\*.
 
 !\[Language](https://img.shields.io/badge/Language-C%2B%2B-00599C?logo=c%2B%2B\&logoColor=white)
 !\[License](https://img.shields.io/badge/License-MIT-green.svg)
@@ -19,7 +19,7 @@ Mỗi thuật toán được trình bày theo cùng một quy trình:
 5. Phân tích độ đúng và độ phức tạp.
 6. Đưa ra bài tập gợi ý để tự luyện tập.
 
-> \\\\\\\\\\\\\\\*\\\\\\\\\\\\\\\*Lưu ý:\\\\\\\\\\\\\\\*\\\\\\\\\\\\\\\* Repository này là tài liệu học tập tham khảo, không thay thế bài giảng, giáo trình hoặc hướng dẫn chính thức của giảng viên.
+> \\\*\\\*Lưu ý:\\\*\\\* Repository này là tài liệu học tập tham khảo, không thay thế bài giảng, giáo trình hoặc hướng dẫn chính thức của giảng viên.
 
 ## Mục tiêu học tập
 
@@ -36,14 +36,14 @@ Sau khi nghiên cứu và thực hành các nội dung trong repository, ngườ
 
 Giai đoạn đầu của repository tập trung vào các thuật toán sắp xếp.
 
-|Thuật toán|Tốt nhất|Trung bình|Xấu nhất|Bộ nhớ phụ|
-|-|-:|-:|-:|-:|
-|Selection Sort|`O(n²)`|`O(n²)`|`O(n²)`|`O(1)`|
-|Bubble Sort|`O(n)`<sup>1</sup>|`O(n²)`|`O(n²)`|`O(1)`|
-|Insertion Sort|`O(n)`|`O(n²)`|`O(n²)`|`O(1)`|
-|Quick Sort|`O(n log n)`|`O(n log n)`|`O(n²)`|`O(log n)`<sup>2</sup>|
-|Heap Sort|`O(n log n)`|`O(n log n)`|`O(n log n)`|`O(1)`|
-|Merge Sort|`O(n log n)`|`O(n log n)`|`O(n log n)`|`O(n)`|
+|Thuật toán|Tốt nhất|Trung bình|Xấu nhất|Bộ nhớ phụ|Ổn định|Tại chỗ|
+|-|-:|-:|-:|-:|:-:|:-:|
+|Selection Sort|`O(n²)`|`O(n²)`|`O(n²)`|`O(1)`|Không|Có|
+|Bubble Sort|`O(n)`<sup>1</sup>|`O(n²)`|`O(n²)`|`O(1)`|Có|Có|
+|Insertion Sort|`O(n)`|`O(n²)`|`O(n²)`|`O(1)`|Có|Có|
+|Quick Sort|`O(n log n)`|`O(n log n)`|`O(n²)`|`O(log n)`<sup>2</sup>|Không|Có<sup>3</sup>|
+|Heap Sort|`O(n log n)`|`O(n log n)`|`O(n log n)`|`O(1)`|Không|Có|
+|Merge Sort|`O(n log n)`|`O(n log n)`|`O(n log n)`|`O(n)`|Có|Không|
 
 1. Bubble Sort chỉ đạt `O(n)` trong trường hợp tốt nhất khi có biến kiểm tra để dừng sớm.
 2. Quick Sort cần trung bình `O(log n)` bộ nhớ cho ngăn xếp đệ quy; trường hợp xấu nhất có thể cần `O(n)`.
@@ -74,7 +74,7 @@ Với phiên bản tăng dần, ở mỗi lượt, thuật toán tìm phần t�
 * Vòng lặp ngoài thường chạy từ `i = 0` đến `n - 2`.
 * Vòng lặp trong tìm phần tử nhỏ nhất từ `j = i + 1` đến `n - 1`.
 * Chỉ đổi chỗ một lần sau khi vòng lặp trong kết thúc.
-* Phải đổi `a\\\\\\\\\\\\\\\[i]` với `a\\\\\\\\\\\\\\\[minIndex]`, không đổi với `a\\\\\\\\\\\\\\\[j]` sau vòng lặp.
+* Phải đổi `a\\\[i]` với `a\\\[lowindex]`, không đổi với `a\\\[j]` sau vòng lặp.
 * Thuật toán luôn thực hiện khoảng `n(n - 1) / 2` phép so sánh, dù mảng đã có thứ tự.
 * Số lần đổi chỗ ít, tối đa khoảng `n - 1` lần.
 * Phiên bản thông thường không ổn định nhưng sắp xếp tại chỗ.
@@ -83,10 +83,10 @@ Với phiên bản tăng dần, ở mỗi lượt, thuật toán tìm phần t�
 
 ```cpp
 // Sai: j đã chạy hết vòng lặp tìm kiếm.
-Swap(a\\\\\\\\\\\\\\\[i], a\\\\\\\\\\\\\\\[j]);
+Swap(\\\&a\\\[i], \\\&a\\\[j]);
 
 // Đúng:
-Swap(a\\\\\\\\\\\\\\\[i], a\\\\\\\\\\\\\\\[minIndex]);
+Swap(\\\&a\\\[i], \\\&a\\\[lowindex]);
 ```
 
 #### Khi nên sử dụng
@@ -120,7 +120,7 @@ Cả hai cách đều đúng nếu điều kiện so sánh và giới hạn vòn
 #### Lỗi thường gặp
 
 * Nhầm hướng duyệt nhưng không đổi điều kiện so sánh.
-* Cho `j` chạy quá giới hạn rồi truy cập `a\\\\\\\\\\\\\\\[j + 1]` hoặc `a\\\\\\\\\\\\\\\[j - 1]` ngoài mảng.
+* Cho `j` chạy quá giới hạn rồi truy cập `a\\\[j + 1]` hoặc `a\\\[j - 1]` ngoài mảng.
 * Dùng `>=` thay vì `>` khiến các phần tử bằng nhau có thể bị đổi thứ tự.
 * Quên thu hẹp phần mảng chưa được sắp xếp sau mỗi lượt.
 
@@ -145,15 +145,15 @@ Thuật toán xem phần đầu của mảng là đoạn đã được sắp x�
 * Vòng lặp ngoài thường bắt đầu từ `i = 1` vì một phần tử đầu tiên được xem là đã có thứ tự.
 * Gán `j = i` để theo dõi vị trí hiện tại của phần tử đang được chèn.
 * Sau mỗi lần đổi chỗ với phần tử đứng trước, phải có `j--` để tiếp tục đưa phần tử sang trái.
-* Điều kiện `j > 0` phải được kiểm tra trước khi truy cập `a\\\\\\\\\\\\\\\[j - 1]`.
+* Điều kiện `j > 0` phải được kiểm tra trước khi truy cập `a\\\[j - 1]`.
 * Thuật toán ổn định nếu chỉ dịch chuyển hoặc đổi chỗ khi khóa bên trái lớn hơn khóa đang xét.
 * Insertion Sort có tính thích nghi và hoạt động tốt với mảng nhỏ hoặc gần có thứ tự.
 
 Ví dụ điều kiện an toàn:
 
 ```cpp
-while ((j > 0) \\\\\\\\\\\\\\\&\\\\\\\\\\\\\\\& (a\\\\\\\\\\\\\\\[j].key < a\\\\\\\\\\\\\\\[j - 1].key)) {
-    Swap(a\\\\\\\\\\\\\\\[j], a\\\\\\\\\\\\\\\[j - 1]);
+while ((j > 0) \\\&\\\& (a\\\[j].key < a\\\[j - 1].key)) {
+    Swap(\\\&a\\\[j], \\\&a\\\[j - 1]);
     j--;
 }
 ```
@@ -161,7 +161,7 @@ while ((j > 0) \\\\\\\\\\\\\\\&\\\\\\\\\\\\\\\& (a\\\\\\\\\\\\\\\[j].key < a\\\\
 #### Lỗi thường gặp
 
 * Quên `j--`, khiến phần tử chỉ di chuyển được một vị trí hoặc vòng lặp không hoạt động đúng.
-* Viết điều kiện truy cập `a\\\\\\\\\\\\\\\[j - 1]` trước `j > 0`, có thể truy cập `a\\\\\\\\\\\\\\\[-1]`.
+* Viết điều kiện truy cập `a\\\[j - 1]` trước `j > 0`, có thể truy cập `a\\\[-1]`.
 * Bắt đầu vòng lặp ngoài từ `i = 0` dù chưa cần chèn phần tử đầu tiên.
 * Dùng điều kiện `<=` làm thay đổi thứ tự của các phần tử có khóa bằng nhau.
 
@@ -187,7 +187,7 @@ Các phần tử < pivot | Các phần tử >= pivot
 
 1. `FindPivot()` tìm một pivot phù hợp.
 2. `Partition()` chia mảng thành hai phần và trả về điểm phân hoạch `k`.
-3. `QuickSort()` gọi đệ quy trên hai đoạn `\\\\\\\\\\\\\\\[i, k - 1]` và `\\\\\\\\\\\\\\\[k, j]`.
+3. `QuickSort()` gọi đệ quy trên hai đoạn `\\\[i, k - 1]` và `\\\[k, j]`.
 
 #### Điểm cần nhớ
 
@@ -196,7 +196,7 @@ Các phần tử < pivot | Các phần tử >= pivot
 * Con trỏ `L` đi từ trái sang phải; con trỏ `R` đi từ phải sang trái.
 * Với phiên bản tăng dần gốc, `L` dừng ở phần tử `>= pivot`, còn `R` dừng ở phần tử `< pivot`.
 * `Partition()` trả về điểm phân hoạch, không nhất thiết là vị trí cuối cùng của chính pivot.
-* Hai lời gọi đệ quy phải khớp với cách phân hoạch: `\\\\\\\\\\\\\\\[i, k - 1]` và `\\\\\\\\\\\\\\\[k, j]`.
+* Hai lời gọi đệ quy phải khớp với cách phân hoạch: `\\\[i, k - 1]` và `\\\[k, j]`.
 * Khi gọi cho toàn bộ mảng, phải dùng `QuickSort(a, 0, n - 1)`.
 * Quick Sort thường nhanh trong thực tế nhưng không ổn định.
 
@@ -211,7 +211,7 @@ Các phần tử < pivot | Các phần tử >= pivot
 
 * Truyền `n` thay vì `n - 1`, dẫn đến truy cập ngoài mảng.
 * Không xử lý trường hợp các phần tử trong đoạn đều bằng nhau.
-* Nhầm `pivotindex` là giá trị pivot; giá trị đúng phải lấy bằng `a\\\\\\\\\\\\\\\[pivotindex].key`.
+* Nhầm `pivotindex` là giá trị pivot; giá trị đúng phải lấy bằng `a\\\[pivotindex].key`.
 * Gọi đệ quy sai đoạn, gây bỏ sót phần tử hoặc lặp vô hạn.
 * Viết điều kiện phân hoạch không đồng bộ với cách chọn pivot.
 
@@ -232,8 +232,8 @@ Quick Sort phù hợp với việc sắp xếp mảng trong bộ nhớ và thư�
 Với mảng đánh số từ `0`, các vị trí liên quan đến nút `i` là:
 
 ```text
-Con trái:  2 \\\\\\\\\\\\\\\* i + 1
-Con phải:  2 \\\\\\\\\\\\\\\* i + 2
+Con trái:  2 \\\* i + 1
+Con phải:  2 \\\* i + 2
 Nút cha:   (i - 1) / 2
 ```
 
@@ -347,4 +347,6 @@ g++ --version
 ## Giấy phép
 
 Repository được phát hành theo [MIT License](LICENSE). Bạn có thể sử dụng và chỉnh sửa mã nguồn theo các điều khoản của giấy phép này.
+
+
 
